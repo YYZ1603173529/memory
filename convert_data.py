@@ -534,10 +534,10 @@ def generate_memory_from_video(
     chunk_size: int = 200,
     compress_every: int = 5,
     max_duration: int = None,
-    summarizer_model: str = "qwen3-omni-flash",
+    summarizer_model: str = "qwen2.5-omni-7b",
     summarizer_api_base: str = "",
     api_key: str = "",
-    asr_model: str = "qwen3-asr-flash",
+    asr_model: str = "qwen3-asr",
 ):
     """Process a video through the three-tier memory pipeline and save results.
 
