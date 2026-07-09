@@ -297,7 +297,7 @@ class SummarizerModel:
         api_key: str = "EMPTY",
         longterm_model_name: str = "",
         longterm_api_base: str = "",
-        asr_model_name: str = "qwen3-asr-flash",
+        asr_model_name: str = "qwen3-asr",
         asr_api_base: str = "http://localhost:8001/v1",
         mid_term_max_tokens: int = 5000,
         mid_term_target_tokens: int = 0,
