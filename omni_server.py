@@ -36,7 +36,6 @@ def load_model():
         MODEL_PATH,
         torch_dtype=torch.bfloat16,
         device_map="auto",
-        attn_implementation="flash_attention_2",
     )
     model.disable_talker()  # 只输出文本，节省约2GB显存
     logger.info("Qwen2.5-Omni-7B loaded. talker disabled (text-only mode).")
