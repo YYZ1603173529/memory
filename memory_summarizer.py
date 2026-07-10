@@ -481,10 +481,16 @@ class SummarizerModel:
         return frame_range.strip(), frame_range.strip()
 
     def _parse_time_range_bounds(self, time_range: str) -> tuple:
-        if not time_range or "-" not in time_range:
+        if not time_range:
             return None, None
-        start_text, end_text = time_range.split("-", 1)
-        return self._parse_time_value(start_text), self._parse_time_value(end_text)
+        # 支持 "-" 和 " ~ " 两种分隔符
+        if " ~ " in time_range:
+            parts = time_range.split(" ~ ", 1)
+        elif "-" in time_range:
+            parts = time_range.split("-", 1)
+        else:
+            return None, None
+        return self._parse_time_value(parts[0]), self._parse_time_value(parts[1])
 
     def _format_time_value(self, value: float) -> str:
         if value is None:
@@ -643,7 +649,9 @@ class SummarizerModel:
         if n == 0:
             return []
 
-        if budget <= 0 or n <= budget:
+        if budget <= 0:
+            return []
+        if n <= budget:
             selected_indices = list(range(n))
         else:
             selected_indices = self._sample_sorted_indices(list(range(n)), budget)

@@ -369,7 +369,7 @@ def main():
     parser = argparse.ArgumentParser(description="Convert raw evaluation data to inference format")
     parser.add_argument("--input", "-i", help="Input JSON file or raw_data/ directory")
     parser.add_argument("--output", "-o", help="Output directory; preserves the original directory structure")
-    parser.add_argument("--frame_dir", help="Root directory for saved frame images")
+    parser.add_argument("--frame_dir", default="frames", help="Root directory for saved frame images")
     parser.add_argument("--max_samples", type=int, default=0, help="Only process the first N samples; 0 means process all samples")
     parser.add_argument("--rewrite", action="store_true", help="Force rewrite; equivalent to specifying both --rewrite_frames and --rewrite_json")
     parser.add_argument("--rewrite_frames", action="store_true", help="Force frame re-extraction and overwrite existing frame files")

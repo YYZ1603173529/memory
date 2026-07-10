@@ -34,7 +34,7 @@ def load_model():
     logger.info(f"Loading Qwen2.5-Omni-7B from {MODEL_PATH} ...")
     model = Qwen2_5OmniForConditionalGeneration.from_pretrained(
         MODEL_PATH,
-        torch_dtype=torch.bfloat16,
+        dtype=torch.bfloat16,
         device_map="auto",
     )
     model.disable_talker()  # 只输出文本，节省约2GB显存

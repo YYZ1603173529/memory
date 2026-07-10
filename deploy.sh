@@ -75,7 +75,7 @@ main() {
     mkdir -p "$WORK_DIR/logs" "$WORK_DIR/result"
     case "${1:-start}" in
         deps)    install_deps ;;
-        start)   start_omni; start_asr; check_status ;;
+        start)   start_omni; start_asr; start_memory; check_status ;;
         omni)    start_omni ;;
         asr)     start_asr ;;
         memory)  start_memory ;;
