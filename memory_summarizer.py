@@ -404,7 +404,12 @@ class SummarizerModel:
             top_p=top_p,
             presence_penalty=presence_penalty,
         )
-        return response.choices[0].message.content.strip() if response.choices else ""
+        result = response.choices[0].message.content.strip() if response.choices else ""
+        # 清理模型可能输出的 prompt 残留
+        for marker in ["仅输出该段落。", "仅输出统一的叙述文本，不要输出其他内容。"]:
+            if marker in result:
+                result = result.rsplit(marker, 1)[-1].strip()
+        return result
 
     def transcribe_audio(self, audio_base64: str) -> str:
         """Transcribe base64 audio to text via qwen3-asr-flash API.
