@@ -108,7 +108,8 @@ def extract_frames(video_path, output_dir, fps=1.0, rewrite=False,
             # If frame files already exist and rewrite is not requested, return them directly.
             existing = _list_frame_paths(output_dir)
             if existing and not rewrite:
-                return existing, effective_duration, truncated
+                max_frames = int(effective_duration * fps)
+                return existing[:max_frames], effective_duration, truncated
 
             # Delete old frames in rewrite mode.
             if rewrite and existing:
@@ -160,7 +161,8 @@ def extract_frames(video_path, output_dir, fps=1.0, rewrite=False,
                     f"ffmpeg extracted 0 frames from {video_path}"
                     + (f": {stderr}" if stderr else "")
                 )
-            return paths, effective_duration, truncated
+            max_frames = int(effective_duration * fps)
+            return paths[:max_frames], effective_duration, truncated
     finally:
         with _dir_locks_guard:
             entry[1] -= 1
